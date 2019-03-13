@@ -1,0 +1,100 @@
+country, percent_average
+Albania,89.5454545455
+Antigua and Barbuda,0.407407407407
+Argentina,2652.22580645
+Armenia,76.5833333333
+Aruba,7.21428571429
+Australia,2337.03333333
+Austria,1576.51612903
+Azerbaijan,103.5
+Bahamas,4.04347826087
+Bahrain,22.0476190476
+Barbados,7.08
+Belarus,2852.0
+Belgium,2024.5483871
+Belize,12.4285714286
+Bosnia and Herzegovina,159.0
+Brazil,7310.09677419
+Bulgaria,1212.93333333
+Cabo Verde,42.0
+Canada,3709.0
+Chile,1319.19354839
+Colombia,1712.25806452
+Costa Rica,226.4
+Croatia,845.047619048
+Cuba,1725.75
+Cyprus,26.8571428571
+Czech Republic,1629.57692308
+Denmark,695.318181818
+Dominica,0.0
+Ecuador,666.451612903
+El Salvador,486.791666667
+Estonia,334.952380952
+Fiji,27.6363636364
+Finland,1161.27586207
+France,10970.9
+Georgia,146.545454545
+Germany,11202.3846154
+Greece,398.967741935
+Grenada,1.52
+Guatemala,271.633333333
+Guyana,137.04
+Hungary,2885.2
+Iceland,34.4516129032
+Ireland,419.133333333
+Israel,364.322580645
+Italy,4260.0
+Jamaica,10.8235294118
+Japan,26029.0967742
+Kazakhstan,3905.61538462
+Kiribati,4.81818181818
+Kuwait,38.64
+Kyrgyzstan,503.461538462
+Latvia,608.095238095
+Lithuania,1296.04761905
+Luxembourg,63.1612903226
+Macau,27.0
+Maldives,2.0
+Malta,18.8709677419
+Mauritius,122.451612903
+Mexico,3585.12903226
+Montenegro,47.2
+Netherlands,1578.93548387
+New Zealand,495.965517241
+Nicaragua,335.5
+Norway,566.4
+Oman,11.0
+Panama,139.32
+Paraguay,177.148148148
+Philippines,1422.0
+Poland,5795.75
+Portugal,891.148148148
+Puerto Rico,291.709677419
+Qatar,36.1428571429
+Republic of Korea,8442.90322581
+Romania,2623.11111111
+Russian Federation,44805.2592593
+Saint Kitts and Nevis,0.0
+Saint Lucia,8.21428571429
+Saint Vincent and Grenadines,4.96
+San Marino,1.33333333333
+Serbia,1343.27777778
+Seychelles,5.44444444444
+Singapore,325.451612903
+Slovakia,610.772727273
+Slovenia,505.476190476
+South Africa,366.05
+Spain,3232.32258065
+Sri Lanka,5058.27272727
+Suriname,77.3571428571
+Sweden,1264.31034483
+Switzerland,1248.42857143
+Thailand,3945.40740741
+Trinidad and Tobago,149.592592593
+Turkey,1447.28571429
+Turkmenistan,297.379310345
+Ukraine,11426.7857143
+United Arab Emirates,103.666666667
+United Kingdom,4413.06451613
+United States,33355.2580645
+Uruguay,469.214285714
