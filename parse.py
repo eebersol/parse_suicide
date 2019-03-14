@@ -35,10 +35,9 @@ def print_result_per_country(country, f):
             i += 1
             percent_average += (elem['population'] * elem["percent"])/100
             population = elem['population']
-        if country == elem['country']:  
             suicide_nbr += elem['suicide_nbr']
     if i > 0:
-        percent_average_suicide = float((100 * suicide_nbr)/population)
+        percent_average_suicide = float(((100 * suicide_nbr)/(population))/i)
         percent_average_suicide = '%.4f'%(percent_average_suicide)
         print(percent_average_suicide, suicide_nbr, population)
         finalline = country + ',' + str(percent_average_suicide) + ',' + str(suicide_nbr/i) + '\n'
@@ -83,10 +82,10 @@ def get_country(dataset):
 with open('master.csv','rb') as f:
     mylist = list(f)
     countryList =  get_country(mylist)
-    for country in countryList:
-        country = country.replace("b'", "")
-        print(country)
-        get_average_per_year(mylist, country, 1985)
+    # for country in countryList:
+    #     country = country.replace("b'", "")
+    #     print(country)
+    get_average_per_year(mylist, "France", 1985)
     f = open("result_per_country.txt", "w")
     f.write("country, percent_average, suicide_average\n")
     for country in countryList:
