@@ -1,20 +1,4 @@
-import csv
-
-# 0     country
-
-# 1     year,
-# 2     sex,
-# 3     age,
-# 4     suicides_no,
-# 5     population,
-# 6     suicides/100k pop,
-# 7     country-year,
-# 8     HDI for year,
-# 9     gdp_for_year ($) ,
-# 10    gdp_per_capita ($),
-# 11    generation
 finallist = []
-
 
 def print_result_per_year():
     f = open("result_per_years.txt", "w")
@@ -22,8 +6,6 @@ def print_result_per_year():
     for line in finallist:
         finalline = str(line['country']) + ',' + str(line['population']) + ',' + str(line['percent']) + ',' + str(line['suicide_nbr']) + ',' + str(line['year']) + '\n'
         f.write(finalline)
-    
-    print("Result per years OK")
 
 def print_result_per_country(country, f):
     i = 0
@@ -39,7 +21,6 @@ def print_result_per_country(country, f):
     if i > 0:
         percent_average_suicide = float(((100 * suicide_nbr)/(population))/i)
         percent_average_suicide = '%.4f'%(percent_average_suicide)
-        print(percent_average_suicide, suicide_nbr, population)
         finalline = country + ',' + str(percent_average_suicide) + ',' + str(suicide_nbr/i) + '\n'
         f.write(finalline)
     
@@ -82,14 +63,13 @@ def get_country(dataset):
 with open('master.csv','rb') as f:
     mylist = list(f)
     countryList =  get_country(mylist)
-    # for country in countryList:
-    #     country = country.replace("b'", "")
-    #     print(country)
-    get_average_per_year(mylist, "France", 1985)
+    for country in countryList:
+        country = country.replace("b'", "")
+        print(country)
+        get_average_per_year(mylist, country, 1985)
     f = open("result_per_country.txt", "w")
     f.write("country, percent_average, suicide_average\n")
     for country in countryList:
-        print("PRINT ", country)
         country = country.replace("b'", "")
         print_result_per_country(country, f)
     print_result_per_year()
