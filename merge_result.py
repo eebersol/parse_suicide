@@ -42,8 +42,7 @@ def merge_data():
 
         data = get_data(line[0], res_pib_country)
         if len(data) > 1:
-            line[2] = line[2].replace("\n", "")
-            f.write(line[0] + ',' + line[2] + ',' + data[33])
+            f.write(line[0] + ',' + line[1] + ',' + data[33] + '\n')
 
     
 merge_data()
