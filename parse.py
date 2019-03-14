@@ -1,6 +1,7 @@
 import csv
 
-# 0     country,
+# 0     country
+
 # 1     year,
 # 2     sex,
 # 3     age,
@@ -13,6 +14,7 @@ import csv
 # 10    gdp_per_capita ($),
 # 11    generation
 finallist = []
+
 
 def print_result_per_year():
     f = open("result_per_years.txt", "w")
