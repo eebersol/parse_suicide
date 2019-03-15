@@ -1,78 +1,89 @@
-finallist = []
+finallist = [] # variable global permettant de stocker la liste final
 
-def print_result_per_year():
-    f = open("result_per_years.txt", "w")
-    f.write("country, population, percent, suicide_nbr, year\n")
+def rmv_b(country): # Permet de supprimer le b' qui ce met souvent en general avant le nom du pays, ceci a un rapport avec le type de la variables qui serait un byte ?
+    return country.replace("b'", "")
+
+def print_result_per_year(): # Print le resultat de la premiere merge
+    newf = open("result_per_years.txt", "w")
+
+    newf.write("country, population, suicide_nbr, year\n")
     for line in finallist:
-        finalline = str(line['country']) + ',' + str(line['population']) + ',' + str(line['percent']) + ',' + str(line['suicide_nbr']) + ',' + str(line['year']) + '\n'
-        f.write(finalline)
+        newf.write(str(line['country']) + ',' + \
+                        str(line['population']) + ',' + \
+                            str(line['suicide_nbr']) + ',' + \
+                                str(line['year']) + '\n')
 
-def print_result_per_country(country, f):
-    i = 0
-    percent_average = 0
-    suicide_nbr = 0
-    population = 0
+def print_result_per_country(country, fd): # Merge les differentes annees pour un meme pays, en une seule ligne
+    population  = 0
+    suicides    = 0
+    years       = 0
+
     for elem in finallist:
         if country == elem['country'] and elem['population'] > 0:
-            i += 1
-            percent_average += (elem['population'] * elem["percent"])/100
-            population = elem['population']
-            suicide_nbr += elem['suicide_nbr']
-    if i > 0:
-        percent_average_suicide = float(((100 * suicide_nbr)/(population))/i)
+            population  = elem['population']
+            suicides    += elem['suicide_nbr']
+            years       += 1
+    if years > 0:
+        percent_average_suicide = float(((100 * suicides)/(population))/years)
         percent_average_suicide = '%.4f'%(percent_average_suicide)
-        finalline = country + ',' + str(percent_average_suicide) + ',' + str(suicide_nbr/i) + '\n'
-        f.write(finalline)
+        fd.write(country + ',' + str(percent_average_suicide) + ',' + str(suicides/years) + '\n')
     
-def get_average_per_year(dataset, country, year):
-    percent = 0
-    suicide = 0
-    population = 0
-    for line in dataset:
-        line = str(line).split(",")
-        line[0] = line[0].replace("b'", "")
-        if country == line[0] and year == int(line[1]):
-            suicide += int(line[4])
-            population += int(line[5])
-    if population > 0:
-        percent = (100 * int(suicide)) / float(population)
-    obj = {
-        'country':country,
-        'year':year,
-        'suicide_nbr':suicide,
-        'percent':percent,
-        'population':population
-    }
-    finallist.append(obj)
-    year += 1
-    if year == 2016:
-        return
-    else:
-        get_average_per_year(dataset, country, year)
+def get_average_per_year(dataset, country, year): # Merge les differentes data pour un meme pays et une meme date
+    suicide     = 0
+    population  = 0
 
-def get_country(dataset):
-    country = "Albania"
-    countryList = []
     for line in dataset:
         line = str(line).split(",")
-        if line[0] != country:
+        # Si c'est le bon pays et la bonne anée alors tu concats les informations
+        if country == rmv_b(line[0]) and year == int(line[1]):
+            suicide     += int(line[4])
+            population  += int(line[5])        
+    
+    finallist.append({
+        'country'       : country,
+        'year'          : year,
+        'suicide_nbr'   : suicide,
+        'population'    : population
+    })
+    
+    if year + 1 == 2017:
+        return 
+    else:
+        get_average_per_year(dataset, country, year + 1)
+
+def get_country(dataset): # Recupère la liste de pays
+    countryList = []
+    country     = 0
+    
+    for line in dataset:
+        line = str(line).split(",")
+        if country and line[0] != country:
             countryList.append(country)
         country = line[0]
     return countryList
  
 with open('master.csv','rb') as f:
-    mylist = list(f)
-    countryList =  get_country(mylist)
-    for country in countryList:
-        country = country.replace("b'", "")
-        print(country)
-        get_average_per_year(mylist, country, 1985)
-    f = open("result_per_country.txt", "w")
-    f.write("country, percent_average, suicide_average\n")
-    for country in countryList:
-        country = country.replace("b'", "")
-        print_result_per_country(country, f)
+    dataset         = list(f)
+    # Recupere la liste des pays
+    countries       = get_country(dataset)
+    lencountries    = len(countries)
+    i               = 0
+
+    # Merge les lignes ayant le meme pays et la meme annee
+    for country in countries:
+        country = rmv_b(country)
+        print(country, str(i) + "/" + str(lencountries))
+        get_average_per_year(dataset, country, 1985)
+        i += 1
+
+    # Print le resultat de la merge
     print_result_per_year()
+
+    # Merge les differentes annees pour un meme pays, en une seule ligne
+    fd = open("result_per_country.txt", "w")    
+    fd.write("country, percent_average, suicide_average\n")
+    for country in countries:
+        print_result_per_country(rmv_b(country), fd)
 
 
 
