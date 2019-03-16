@@ -1,3 +1,5 @@
+import copy
+
 finallist = [] # variable global permettant de stocker la liste final
 
 def rmv_b(country): # Permet de supprimer le b' qui ce met souvent en general avant le nom du pays, ceci a un rapport avec le type de la variables qui serait un byte ?
@@ -31,14 +33,19 @@ def print_result_per_country(country, fd): # Merge les differentes annees pour u
 def get_average_per_year(dataset, country, year): # Merge les differentes data pour un meme pays et une meme date
     suicide     = 0
     population  = 0
+    tmp = copy.copy(dataset)
+    j = 0
 
-    for line in dataset:
-        line = str(line).split(",")
+    for line in tmp:
+        toto = str(line).split(",")
         # Si c'est le bon pays et la bonne anée alors tu concats les informations
-        if country == rmv_b(line[0]) and year == int(line[1]):
-            suicide     += int(line[4])
-            population  += int(line[5])        
-    
+        if country == rmv_b(toto[0]) and year == int(toto[1]):
+            suicide     += int(toto[4])
+            population  += int(toto[5])  
+            del dataset[j]
+        j += 1
+      
+   # print(len(dataset))
     finallist.append({
         'country'       : country,
         'year'          : year,
@@ -74,6 +81,7 @@ with open('master.csv','rb') as f:
         country = rmv_b(country)
         print(country, str(i) + "/" + str(lencountries))
         get_average_per_year(dataset, country, 1985)
+        print(len(dataset))
         i += 1
 
     # Print le resultat de la merge
